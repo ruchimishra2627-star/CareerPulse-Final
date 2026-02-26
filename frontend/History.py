@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
-from datetime import datetime
+from datetime import datetime, timedelta
 import random
 
 def show():
@@ -142,16 +142,19 @@ def show():
     
     st.markdown("<h1 style='text-align: center;'>📋 Analysis History</h1>", unsafe_allow_html=True)
     
-    # Initialize session state for history if not exists
-    if 'history_data' not in st.session_state:
+    # ===== FIXED: HISTORY DATA GENERATION =====
+    if 'history_data' not in st.session_state or len(st.session_state.history_data) == 0:
         # Create sample history data
         st.session_state.history_data = []
         
         # Generate 20 sample records
         domains = ["Software Developer", "Data Scientist", "Web Developer", "Business Analyst", "Cyber Security"]
+        from datetime import datetime, timedelta
+        import random
+        
         for i in range(20):
-            date = datetime.now().replace(day=datetime.now().day - i)
-            prob = random.randint(45, 95)
+            date = datetime.now() - timedelta(days=i)
+            prob = random.randint(45, 98)
             if prob >= 70:
                 risk = "Low Risk"
                 badge = "badge-high"
@@ -193,7 +196,7 @@ def show():
     
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # ===== FIXED STATISTICS SECTION =====
+    # ===== FIXED: STATISTICS SECTION =====
     st.markdown('<div class="history-card">', unsafe_allow_html=True)
     st.markdown("### 📊 Your Progress Overview")
     
@@ -238,14 +241,9 @@ def show():
                 <div class="stat-label">Total Analyses</div>
             </div>
             """, unsafe_allow_html=True)
-    else:
-        st.warning("No history data available. Generate some predictions first!")
-        df = pd.DataFrame()  # Empty dataframe for later use
-    
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Only show charts and history if data exists
-    if 'history_data' in st.session_state and len(st.session_state.history_data) > 0 and not df.empty:
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+        
         # Progress Chart
         st.markdown('<div class="history-card">', unsafe_allow_html=True)
         st.markdown("### 📈 Score Trend")
@@ -338,16 +336,19 @@ def show():
             filtered_df = filtered_df[filtered_df['risk'] == filter_risk]
         
         if filter_date == "Last 7 Days":
-            filtered_df = filtered_df.head(7)
+            cutoff_date = datetime.now() - timedelta(days=7)
+            filtered_df = filtered_df[pd.to_datetime(filtered_df['date'], format='%d %b %Y') >= cutoff_date]
         elif filter_date == "Last 30 Days":
-            filtered_df = filtered_df.head(30)
+            cutoff_date = datetime.now() - timedelta(days=30)
+            filtered_df = filtered_df[pd.to_datetime(filtered_df['date'], format='%d %b %Y') >= cutoff_date]
         elif filter_date == "Last 90 Days":
-            filtered_df = filtered_df.head(90)
+            cutoff_date = datetime.now() - timedelta(days=90)
+            filtered_df = filtered_df[pd.to_datetime(filtered_df['date'], format='%d %b %Y') >= cutoff_date]
         
         if sort_by == "Newest First":
-            filtered_df = filtered_df
+            filtered_df = filtered_df.sort_values('date', ascending=False)
         elif sort_by == "Oldest First":
-            filtered_df = filtered_df.iloc[::-1]
+            filtered_df = filtered_df.sort_values('date', ascending=True)
         elif sort_by == "Highest Score":
             filtered_df = filtered_df.sort_values('probability', ascending=False)
         elif sort_by == "Lowest Score":
