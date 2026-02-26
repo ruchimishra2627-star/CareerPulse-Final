@@ -6,3 +6,5 @@ plotly==5.17.0
 mysql-connector-python==8.1.0
 python-dotenv==1.0.0
 setuptools
+wheel
+pillow
