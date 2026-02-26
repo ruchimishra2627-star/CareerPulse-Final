@@ -1,6 +1,8 @@
 import streamlit as st
 import sys
 import os
+import datetime
+
 sys.path.append(os.path.dirname(__file__))
 
 st.set_page_config(
@@ -8,6 +10,34 @@ st.set_page_config(
     page_icon="🎯",
     layout="wide"
 )
+
+# ===== HEALTH CHECK ENDPOINT FOR UPTIMEROBOT =====
+def health_check():
+    """Simple health check endpoint to keep Render awake"""
+    st.markdown("""
+    <h1 style='color: #00ff9d;'>✅ CareerPulse AI - Healthy</h1>
+    <p>Server is running properly!</p>
+    """, unsafe_allow_html=True)
+    
+    # Show server stats
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("Status", "🟢 Online")
+    with col2:
+        st.metric("Timestamp", datetime.datetime.now().strftime("%H:%M:%S"))
+    
+    st.json({
+        "status": "ok",
+        "timestamp": datetime.datetime.now().isoformat(),
+        "service": "CareerPulse AI",
+        "version": "1.0.0"
+    })
+
+# Health check route - Render ke liye
+if st.query_params.get("health") == "1" or st.query_params.get("health") == "true":
+    health_check()
+    st.stop()
+# ==================================================
 
 # Page routing
 if 'page' not in st.session_state:
