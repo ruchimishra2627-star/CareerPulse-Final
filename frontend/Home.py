@@ -301,7 +301,7 @@ def show():
             st.session_state.page = "CareerPath"
             st.rerun()
     
-    # Quick Actions
+    # Quick Actions - ONLY 4 BUTTONS NOW
     st.markdown('<div class="section-title">⚡ Quick Actions</div>', unsafe_allow_html=True)
     
     col1, col2, col3, col4 = st.columns(4)
@@ -317,44 +317,21 @@ def show():
             st.rerun()
     
     with col3:
-        if st.button("📋 History", use_container_width=True):
-            st.session_state.page = "History"
-            st.rerun()
-    
-    with col4:
-        if st.button("👤 Profile", use_container_width=True):
-            st.session_state.page = "Profile"
-            st.rerun()
-    
-    # Second row of Quick Actions
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
         if st.button("📈 Skill Gap", use_container_width=True):
             st.session_state.page = "SkillGap"
             st.rerun()
     
-    with col2:
+    with col4:
         if st.button("🎯 Career Path", use_container_width=True):
             st.session_state.page = "CareerPath"
             st.rerun()
     
-    with col3:
-        if st.button("📊 Analytics", use_container_width=True):
-            st.session_state.page = "Analytics"  # 👈 YEH CHANGE KIYA - Coming Soon HATAYA
-            st.rerun()
-    
-    with col4:
+    # Logout button - separate row
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col2:
         if st.button("🚪 Logout", use_container_width=True):
             st.session_state.authenticated = False
             st.session_state.page = "Login"
-            st.rerun()
-    
-    # Third row of Quick Actions - About button
-    col1, col2, col3, col4 = st.columns(4)
-    with col2:
-        if st.button("ℹ️ About Project", use_container_width=True):
-            st.session_state.page = "About"
             st.rerun()
     
     # Footer

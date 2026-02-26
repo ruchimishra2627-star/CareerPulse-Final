@@ -56,7 +56,7 @@ if 'page' not in st.session_state:
 if 'authenticated' not in st.session_state:
     st.session_state.authenticated = False
 
-# Navigation
+# Navigation - ONLY 7 PAGES
 if st.session_state.page == "Login":
     import frontend.Login as Login
     Login.show()
@@ -78,15 +78,3 @@ elif st.session_state.page == "CareerPath":
 elif st.session_state.page == "Resume":
     import frontend.Resume as Resume
     Resume.show()
-elif st.session_state.page == "History":
-    import frontend.History as History
-    History.show()
-elif st.session_state.page == "Profile":
-    import frontend.Profile as Profile
-    Profile.show()
-elif st.session_state.page == "About":
-    import frontend.About as About
-    About.show()
-elif st.session_state.page == "Analytics":
-    import frontend.Analytics as Analytics
-    Analytics.show()

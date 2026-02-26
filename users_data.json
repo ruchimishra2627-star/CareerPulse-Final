@@ -137,5 +137,29 @@
         "email": "riya@gmail.com",
         "password": "472bbe83616e93d3c09a79103ae47d8f71e3d35a966d6e8b22f743218d04171d",
         "created_at": "2026-02-26 14:21:35"
+    },
+    "rupa@gmail.com": {
+        "name": "rupa",
+        "email": "rupa@gmail.com",
+        "password": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+        "created_at": "2026-02-26 17:18:40"
+    },
+    "sonu@gmail.com": {
+        "name": "sonu",
+        "email": "sonu@gmail.com",
+        "password": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+        "created_at": "2026-02-26 20:26:23"
+    },
+    "ruchi14@gmail.com": {
+        "name": "ruchi",
+        "email": "ruchi14@gmail.com",
+        "password": "472bbe83616e93d3c09a79103ae47d8f71e3d35a966d6e8b22f743218d04171d",
+        "created_at": "2026-02-26 20:35:10"
+    },
+    "vishal@gmail.com": {
+        "name": "vishal",
+        "email": "vishal@gmail.com",
+        "password": "472bbe83616e93d3c09a79103ae47d8f71e3d35a966d6e8b22f743218d04171d",
+        "created_at": "2026-02-26 20:51:54"
     }
 }
